@@ -15,12 +15,13 @@ class Bank_Account
         void display_account();
         void receipt();
         void edit_account();
-    protected:
-
-    private:
         void deposit_money();
         void withdraw_money();
 
+    protected:
+
+    private:
+        
 };
 
 #endif // BANK_ACCOUNT_H
