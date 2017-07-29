@@ -2,6 +2,9 @@
 #define BANK_ACCOUNT_H
 #include <iostream>
 #include<string>
+#include<fstream>
+#include<iomanip>
+using namespace std;
 class Bank_Account
 {
     int account_num;
@@ -13,15 +16,17 @@ class Bank_Account
         virtual ~Bank_Account();
         void account_creation();
         void display_account();
-        void receipt();
+        void receipt(int n);
         void edit_account();
-        void deposit_money();
-        void withdraw_money();
+        void report() const;
+        void withdraw_money(double money);
 
     protected:
 
     private:
-        
+        void deposit_money();
+
 };
 
 #endif // BANK_ACCOUNT_H
+
