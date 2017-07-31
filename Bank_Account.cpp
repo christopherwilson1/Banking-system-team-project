@@ -41,68 +41,62 @@ void Bank_Account::account_creation()
 
 void Bank_Account::withdraw_money(double money)
 {
- string answer;
- std::cout << "would you like a receipt y/n" << std::endl;
+     string answer;
+     std::cout << "would you like a receipt y/n" << std::endl;
 
- std::cin >> answer;
- std::ofstream receiptFile;
- receiptFile.open("customer_receipt.txt");
- //std::ofstream accountFile;
- //accountFile.open("customer_account.txt");
- if (answer == "y")
- {
+     std::cin >> answer;
+     std::ofstream receiptFile;
+     receiptFile.open("customer_receipt.txt");
+     std::ofstream accountFile;
+     accountFile.open("customer_account.txt",std::fstream::app);
+     if (answer == "y")
+     {
 
-  if (money <= deposit && money >= 0)
-  {
-   deposit -= money;
-   if (receiptFile.is_open())
-   {
-    std::cout << "receipt printed" << std::endl;
-    receiptFile << deposit << std::endl;
-    //accountFile<<deposit<<std::endl;
-   }
-   else
-   {
-    std::cout << "receipt failed to print please seek out a member of staff" << std::endl;
-   }
-  }
-  else if (money<0)
-  {
-   std::cout << "That is not a figure than can be withdraw please use whole positive numbers" << std::endl;
-   std::cout << "The withdrawal has been aborted" << std::endl;
-  }
-  else if (money>deposit)
-  {
-   std::cout << "You don't have that much money" << std::endl;
-   std::cout << "The withdrawal has been aborted" << std::endl;
-  }
- }
- else
- {
-  if (money <= deposit && money >= 0)
-  {
-   deposit -= money;
-   // accountFile<<deposit;
-  }
-  else if (money<0)
-  {
-   std::cout << "That is not a figure than can be withdraw please use whole positive numbers" << std::endl;
-   std::cout << "The withdrawal has been aborted" << std::endl;
-  }
-  else if (money>deposit)
-  {
-   std::cout << "You don't have that much money" << std::endl;
-   std::cout << "The withdrawal has been aborted" << std::endl;
-  }
- }
+          if (money <= deposit && money >= 0)
+              {
+               deposit -= money;
+               if (receiptFile.is_open())
+                   {
+                        std::cout << "receipt printed" << std::endl;
+                        receiptFile << deposit << std::endl;
+                        accountFile<<deposit<<std::endl;
+                   }
+               else
+                   {
+                        std::cout << "receipt failed to print please seek out a member of staff" << std::endl;
+                   }
+               }
+          else if (money<0)
+              {
+                   std::cout << "That is not a figure than can be withdraw please use whole positive numbers" << std::endl;
+                   std::cout << "The withdrawal has been aborted" << std::endl;
+              }
+          else if (money>deposit)
+              {
+                   std::cout << "You don't have that much money" << std::endl;
+                   std::cout << "The withdrawal has been aborted" << std::endl;
+              }
+    }
+     else
+         {
+          if (money <= deposit && money >= 0)
+              {
+                deposit -= money;
+               accountFile<<deposit;
+              }
+          else if (money<0)
+          {
+               std::cout << "That is not a figure than can be withdraw please use whole positive numbers" << std::endl;
+               std::cout << "The withdrawal has been aborted" << std::endl;
+          }
+          else if (money>deposit)
+          {
+               std::cout << "You don't have that much money" << std::endl;
+               std::cout << "The withdrawal has been aborted" << std::endl;
+          }
+     }
 
  receiptFile.close();
- //accountFile.close();
+ accountFile.close();
 
-}
-
-int main()
-{
- Bank_Account test;
- return 0;
 }
