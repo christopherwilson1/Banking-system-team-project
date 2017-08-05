@@ -23,7 +23,7 @@ void Bank_Account::account_creation()
      std::cout<<"enter in a pin"<<endl;
      std::cin>>pin;
      std::ofstream accountFile;
-     accountFile.open("customer_account.txt",std::fstream::app);
+     accountFile.open("customer_account.csv",std::fstream::app);
          if(accountFile.is_open())
              {
                  std::cout<<"account saved"<<std::endl;
@@ -49,9 +49,9 @@ void Bank_Account::withdraw_money(double money)
 
      std::cin >> answer;
      std::ofstream receiptFile;
-     receiptFile.open("customer_receipt.txt");
+     receiptFile.open("customer_receipt.csv");
      std::ofstream accountFile;
-     accountFile.open("customer_account.txt",std::fstream::app);
+     accountFile.open("customer_account.csv",std::fstream::app);
      if (answer == "y")
      {
 
@@ -104,59 +104,22 @@ void Bank_Account::withdraw_money(double money)
 
 }
 
-string Bank_Account::menu() {
- cout << "      Menu (Select option or enter 5 to quit)" << endl;
- cout << "1. Display Balance"<< endl;
- cout << "2. Deposit Cash "<< endl;
- cout << "3. Withdraw Cash"<< endl;
- cout << "4. Print Balance"<< endl;
- cout << "Enter option:";
 
- int input;
- cin >> input;
-
- if (input == 1) {
- // stringstream sstm;
-  //sstm << "Here is your balance(pounds):" << firstAccountBalance<<"\n";
-  //return sstm.str();
- }
- else if (input == 2) {
-  cout<< "Please enter amount you wish to deposit \n";
-  int deposit;
-  cin >> deposit;
-
-  return "Amount deposited \n";
- }
-
- else if (input == 3) {
-  return "Please enter amount you wish to Withdraw";
- }
- else if (input == 4) {
-  return "Balance has been printed on slip";
- }
- else if (input== 5){
-    exit(0);
- }
- else {
-    return "invalid input";
- }
-}
-string verifyAccount(string customer_name, int pin)
+string Bank_Account::verifyAccount(string customer_name, int pin)
 {
- if (customer_name == firstAccount) {
-  cout << "Card details processed." << endl;
-  if (AccountPin == firstAccountPin) {
-   return "Pin accepted";
-  }
-  else
-  {
-   return "Pin is incorrect";
-  }
+std::ofstream accountFile;
+ accountFile.open("customer_account.csv", std::fstream::app);
+ if (accountFile.is_open())
+ {
+  std::cout << "account saved" << std::endl;
+  accountFile << customer_name<<"," << account_num << "," << account_type << "," << deposit << "," << pin << std::endl;
+  accountFile << "" << endl;
 
  }
  else
  {
-  return "Account does not exist";
+  std::cout << "information failed to save please seek out a member of staff" << std::endl;
  }
-
+ accountFile.close();
 }
+
