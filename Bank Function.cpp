@@ -1,84 +1,55 @@
-#include <iostream>
-#include <string>
-#include <sstream>
-#include <cstdlib>
+#include "Bank_Account.h"
 using namespace std;
-//test account details
-string firstAccount = "Hamzah"; // Name used in place of entering card.
-int firstAccountPin = 1234;
-int firstAccountBalance = 3000;
-
-
-string verifyAccount(string AccountName, int AccountPin)
+Bank_Account::Bank_Account()
 {
- if (AccountName == firstAccount) {
-  cout << "Card details processed." << endl;
-  if (AccountPin == firstAccountPin) {
-   return "Pin accepted";
-  }
-  else
-  {
-   return "Pin is incorrect";
-  }
+ //account_creation();
+}
 
- }
- else
- {
-  return "Account does not exist";
- }
+Bank_Account::~Bank_Account()
+{
+ //dtor
+}
+void Bank_Account::account_creation()
+{
+
+     std::cout << "Enter in your first and last names" << std::endl;
+     gets(customer_name);
+     std::cout << "Enter in the account number" << std::endl;
+     std::cin >> account_num;
+     std::cout << "enter in the account type current or savings" << std::endl;
+     std::cin >> account_type;
+     std::cout << "enter in the amount you would like to put in your account" << std::endl;
+     std::cin >> balance;
+     std::cout << "congratulations your account has been created saving information" << std::endl;
+}
+void Bank_Account::show_account()
+{
+    cout<<"Customer Name"<<customer_name<<endl;
+    cout<<"Acount number"<<account_num<<endl;
+    cout<<"Account Type"<<account_type<<endl;
+    cout<<"Balance"<<balance<<endl;
+
+}
+void Bank_Account::withdraw_money(int money)
+{
+    balance-=money;
+
+}
+void Bank_Account::deposit_money(int money)
+{
+  balance+=money;
 
 }
 
-string menu() {
- cout << "      Menu (Select option or enter 5 to quit)" << endl;
- cout << "1. Display Balance"<< endl;
- cout << "2. Deposit Cash "<< endl;
- cout << "3. Withdraw Cash"<< endl;
- cout << "4. Print Balance"<< endl;
- cout << "Enter option:";
-
- int input;
- cin >> input;
-
- if (input == 1) {
-  stringstream sstm;
-  sstm << "Here is your balance(pounds):" << firstAccountBalance<<"\n";
-  return sstm.str();
- }
- else if (input == 2) {
-  cout<< "Please enter amount you wish to deposit \n";
-  int deposit;
-  cin >> deposit;
- firstAccountBalance += deposit;
-  return "Amount deposited \n";
- }
-
- else if (input == 3) {
-  return "Please enter amount you wish to Withdraw";
- }
- else if (input == 4) {
-  return "Balance has been printed on slip";
- }
- else if (input== 5){
-    exit(0);
- }
- else {
-    return "invalid input";
- }
-}
-
-
-int main()
+int Bank_Account::give_accountnum()
 {
- string AccountName;
- int AccountPin;
- cout << "Enter your name for your account";
- cin >> AccountName;
- cout << "Enter your pin";
- cin >> AccountPin;
- cout << verifyAccount(AccountName, AccountPin) << "\n";
- while (true){
- cout<<menu();
- }
- return 0;
+    return account_num;
+}
+char Bank_Account::give_accounttype()
+{
+    return account_type;
+}
+int Bank_Account::give_accountdep()
+{
+    return balance;
 }
